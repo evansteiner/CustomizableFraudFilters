@@ -1,11 +1,11 @@
 <?php
 $installer = $this;
 $installer->startSetup();
-$sql=<<<SQLTEXT
-put shit here
-SQLTEXT;
 
-$installer->run($sql);
+$status = Mage::getModel('sales/order_status');
+
+$status->setStatus('manual_review')->setLabel('Manual Review Required')
+    ->assignState(Mage_Sales_Model_Order::STATE_HOLDED)
+    ->save();
 
 $installer->endSetup();
-	 
