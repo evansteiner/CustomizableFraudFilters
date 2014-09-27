@@ -51,7 +51,28 @@
           </checkout_onepage_controller_success_action_handler>
         </observers>
       </checkout_onepage_controller_success_action>
-    </events>
-  
+    </events>   
   </global>
+
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <customizablefraudfilters>
+                                            <title>Store Hello World Module Section</title>
+                                        </customizablefraudfilters>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>   
 </config> 
