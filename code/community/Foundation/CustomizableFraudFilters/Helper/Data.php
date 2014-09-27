@@ -1,6 +1,19 @@
 <?php
 class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_Abstract
 {
+
+  public function checkCity($order) {
+    Mage::log(print_r($order));
+    $billingAddress = $order->getBillingAddress();
+    $shippingAddress = $order->getShippingAddress();
+    $billingCity = $billingAddress["city"];
+    $shippingCity = $shippingAddress["city"];
+    if ($billingCity != $shippingCity) {
+      $flagReason = "Shipping and billing city do not match.";
+      Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+    }
+  }
+
   public function checkZipCode($order) {
     $billingAddress = $order->getBillingAddress();
     $shippingAddress = $order->getShippingAddress();
@@ -10,8 +23,9 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Shipping and billing zip code do not match.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    return;
   }
+
+
 
   public function applyFraudFlag($order, $flagReason){
     $state = "holded";
@@ -21,7 +35,6 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $isCustomerNotified = false;
     $order->setState($state, $status, $comment, $isCustomerNotified);
     $order->save(); 
-    return;
   }
 }
 	 
