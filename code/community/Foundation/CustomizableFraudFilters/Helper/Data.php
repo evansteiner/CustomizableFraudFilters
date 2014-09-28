@@ -105,7 +105,13 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $emailTemplate = Mage::getModel("core/email_template")->loadDefault("fraud_filter_alert");
     $emailTemplate->setSenderName("Fraud Alert");
     $emailTemplate->setSenderEmail("no-reply@fraud-alert.com");
-    $emailTemplate->setTemplateSubject("Potential Fraud Alert: Order #".$order["increment_id"]);
+    if(Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email_subject') != "") {
+      $subject = Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email_subject');
+    }
+    else {
+      $subject = "Potential Fraud Alert";
+    }
+    $emailTemplate->setTemplateSubject($subject.": Order #".$order["increment_id"]);
     $emailTemplate->setType("html");
 
     $emailTemplateVariables = array();
