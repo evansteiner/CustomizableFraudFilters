@@ -25,10 +25,19 @@
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
                <fields>
+                 <frontend_status translate="label">
+                   <label>Status of flagged order shown on front end: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>5</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>The order status your customer will see when the order has been flagged for review. Some themes may not show status. If left blank, the default status of "Held For Manual Review" will be shown.</comment>
+                </frontend_status> 
                  <alert_email translate="label">
                    <label>Send email alert when order is flagged to: </label>
                      <frontend_type>text</frontend_type>
-                     <sort_order>1</sort_order>
+                     <sort_order>10</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
@@ -37,7 +46,7 @@
                  <alert_email_subject translate="label">
                    <label>Alert email subject: </label>
                      <frontend_type>text</frontend_type>
-                     <sort_order>2</sort_order>
+                     <sort_order>15</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>

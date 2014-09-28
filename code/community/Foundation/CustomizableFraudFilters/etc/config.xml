@@ -48,6 +48,11 @@
         <class>Foundation_CustomizableFraudFilters_Model</class>
         <resourceModel>customizablefraudfilters_mysql4</resourceModel>
       </customizablefraudfilters>
+      <sales>
+        <rewrite>
+          <order>Foundation_CustomizableFraudFilters_Model_Sales_Order</order>
+        </rewrite>
+      </sales>
     </models>    
 
     <events>
