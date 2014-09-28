@@ -17,7 +17,8 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     $grandTotalMinFlag = Mage::getStoreConfig('customizablefraudfilters/filters/grand_total_min_flag');
     Mage::log("&grandTotalMinFlag: ".$grandTotalMinFlag);    
 
-
+    $orderContainsProductsFlag = Mage::getStoreConfig('customizablefraudfilters/filters/order_contains_products_flag');
+    Mage::log("&orderContainsProductsFlag: ".$orderContainsProductsFlag);  
 
 
     //begin filters
@@ -35,5 +36,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
       $grandTotalMin = Mage::getStoreConfig('customizablefraudfilters/filters/grand_total_min_flag');
       Mage::helper('customizablefraudfilters')->checkGrandTotalMin($order, $grandTotalMin);
     } 
+
+    if ($orderContainsProductsFlag != null) {
+      Mage::helper('customizablefraudfilters')->checkOrderContainsProducts($order);
+    }     
   }
 }

@@ -3,7 +3,6 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
 {
 
   public function checkCity($order) {
-    Mage::log(print_r($order));
     $billingAddress = $order->getBillingAddress();
     $shippingAddress = $order->getShippingAddress();
     $billingCity = $billingAddress["city"];
@@ -41,6 +40,29 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     }
   }
 
+
+  public function checkOrderContainsProducts($order) {
+    $flaggedItems = "";
+    $filterProducts = Mage::getStoreConfig('customizablefraudfilters/filters/order_contains_products_flag');
+    $filterProducts = explode(",", $filterProducts);
+    foreach ($filterProducts as $filterProduct) {
+      trim($filterProduct);
+    }
+    $items = $order->getAllItems();
+    $itemcount = count($items);
+    foreach ($items as $item){
+      $itemId = $item->getProductId();
+      if (in_array($itemId, $filterProducts)){
+        $flaggedItems = $flaggedItems."Product ID: ".$itemId." - ".$item->getName()."<br/>";
+      }
+    }
+  if($flaggedItems != ""){
+      $flagReason = "The order contained the following items which have been flagged for manual review: <br/><br/>".$flaggedItems;
+      Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+      }
+  }
+
+
   public function applyFraudFlag($order, $flagReason){
     $state = "holded";
     $status = "manual_review";
@@ -66,6 +88,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $emailTemplate->setSenderName("Fraud Alert");
     $emailTemplate->setSenderEmail("no-reply@fraud-alert.com");
     $emailTemplate->setTemplateSubject("Potential Fraud Alert: Order #".$order["increment_id"]);
+    $emailTemplate->setType("html");
 
     $emailTemplateVariables = array();
     $emailTemplateVariables['orderNumber'] = $order["increment_id"];

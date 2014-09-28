@@ -76,7 +76,7 @@
                      <show_in_store>1</show_in_store>
                      <comment>Enter only numbers and decimals (ie: 99.99). Leave blank to deactivate this filter.</comment>
                 </grand_total_max_flag>     
-                 <grand_total_min_flag translate="label">
+                <grand_total_min_flag translate="label">
                    <label>Order grand total is LESS than: </label>
                      <frontend_type>text</frontend_type>
                      <sort_order>4</sort_order>
@@ -84,7 +84,16 @@
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
                      <comment>Enter only numbers and decimals (ie: 1.99). Leave blank to deactivate this filter.</comment>
-                </grand_total_min_flag>                             
+                </grand_total_min_flag> 
+                <order_contains_products_flag translate="label">
+                   <label>Order contains product IDs: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>5</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Enter product IDs.</comment>
+                </order_contains_products_flag>                                             
              </fields>
           </filters>
          </groups>
