@@ -41,6 +41,25 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     }
   }
 
+  public function applyFraudFlag($order, $flagReason){
+    $state = "holded";
+    $status = "manual_review";
+    $notice = "Flagged for manual review: ";
+    $comment = $notice.$flagReason;
+    $isCustomerNotified = false;
+    $order->setState($state, $status, $comment, $isCustomerNotified);
+    $order->save(); 
+
+    if(Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email') != null){
+      $alertEmailAddresses = Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email');
+      $alertEmailAddresses = explode(",", $alertEmailAddresses);
+      foreach ($alertEmailAddresses as $alertEmailAddress) {
+        $alertEmailAddress = trim($alertEmailAddress);
+        Mage::helper('customizablefraudfilters')->sendAlertEmail($order, $alertEmailAddress, $flagReason);
+      }
+    }
+  }
+
 
   public function sendAlertEmail($order, $alertEmailAddress, $flagReason) {
     $emailTemplate = Mage::getModel("core/email_template")->loadDefault("fraud_filter_alert");
@@ -56,23 +75,5 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $emailTemplate->send($alertEmailAddress, null, $emailTemplateVariables);   
   }
 
-
-  public function applyFraudFlag($order, $flagReason){
-    $state = "holded";
-    $status = "manual_review";
-    $notice = "Flagged for manual review: ";
-    $comment = $notice.$flagReason;
-    $isCustomerNotified = false;
-    $order->setState($state, $status, $comment, $isCustomerNotified);
-    $order->save(); 
-
-    if(Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email') != null){
-      $alertEmailAddresses = Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email');
-      $alertEmailAddresses = explode(",", $alertEmailAddresses);
-      foreach ($alertEmailAddresses as $alertEmailAddress) {
-        Mage::helper('customizablefraudfilters')->sendAlertEmail($order, $alertEmailAddress, $flagReason);
-      }
-    }
-  }
 }
 	 
