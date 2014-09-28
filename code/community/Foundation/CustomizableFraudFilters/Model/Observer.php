@@ -5,6 +5,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     $order = Mage::getModel('sales/order')->loadByIncrementId($orderId);
 
     //set flags
+    $stateFlag = Mage::getStoreConfig('customizablefraudfilters/filters/state_flag');
+    Mage::log("&stateFlag: ".$stateFlag);
+
     $cityFlag = Mage::getStoreConfig('customizablefraudfilters/filters/city_flag');
     Mage::log("&cityFlag: ".$cityFlag);  
 
@@ -25,6 +28,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
 
 
     //begin filters
+    if ($stateFlag == 1) {
+      Mage::helper('customizablefraudfilters')->checkState($order);
+    }
     if ($cityFlag == 1) {
       Mage::helper('customizablefraudfilters')->checkCity($order);
     }

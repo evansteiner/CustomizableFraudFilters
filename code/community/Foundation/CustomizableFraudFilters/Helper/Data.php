@@ -2,6 +2,17 @@
 class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
+  public function checkState($order) {
+    $billingAddress = $order->getBillingAddress();
+    $shippingAddress = $order->getShippingAddress();
+    $billingState = $billingAddress["region"];
+    $shippingState = $shippingAddress["region"];
+    if ($billingState != $shippingState) {
+      $flagReason = "Shipping and billing state does not match.";
+      Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+    }
+  }  
+
   public function checkCity($order) {
     $billingAddress = $order->getBillingAddress();
     $shippingAddress = $order->getShippingAddress();
