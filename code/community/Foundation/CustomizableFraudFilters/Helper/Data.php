@@ -74,8 +74,9 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $flaggedItems = "";
     $filterProducts = Mage::getStoreConfig('customizablefraudfilters/filters/order_contains_products_flag');
     $filterProducts = explode(",", $filterProducts);
-    foreach ($filterProducts as $filterProduct) {
-      trim($filterProduct);
+    foreach ($filterProducts as &$filterProduct) {
+      $filterProduct = trim($filterProduct);
+      unset($filterProduct);
     }
     $items = $order->getAllItems();
     $itemcount = count($items);
@@ -95,8 +96,9 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
   public function checkShippingCountry($order) {
     $filterCountries = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_country_flag');
     $filterCountries = explode(",", $filterCountries);
-    foreach ($filterCountries as $filterCountry) {
-      trim($filterCountry);
+    foreach ($filterCountries as &$filterCountry) {
+      $filterCountry = trim($filterCountry);
+      unset($filterCountry);
     }
     $shippingAddress = $order->getShippingAddress();
     $shippingCountry = $shippingAddress["country_id"];
@@ -110,13 +112,28 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
   public function checkBillingCountry($order) {
     $filterCountries = Mage::getStoreConfig('customizablefraudfilters/filters/billing_country_flag');
     $filterCountries = explode(",", $filterCountries);
-    foreach ($filterCountries as $filterCountry) {
-      trim($filterCountry);
+    foreach ($filterCountries as &$filterCountry) {
+      $filterCountry = trim($filterCountry);
+      unset($filterCountry);
     }
     $billingAddress = $order->getBillingAddress();
     $billingCountry = $billingAddress["country_id"];
     if(in_array($billingCountry, $filterCountries)) {
-      $flagReason = "The blling country for this order (".$billingCountry.") is on the filter list.";
+      $flagReason = "The billing country for this order (".$billingCountry.") is on the filter list.";
+      Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+    }
+  }
+
+  public function checkRestrictedEmails($order) {
+    $filterEmails = Mage::getStoreConfig('customizablefraudfilters/filters/restricted_email_flag');
+    $filterEmails = explode(",", $filterEmails);
+    foreach ($filterEmails as &$filterEmail) {
+      $filterEmail = trim($filterEmail);
+      unset($filterEmail);
+    }
+    $customerEmail = $order->getCustomerEmail();
+    if(in_array($customerEmail, $filterEmails)) {
+      $flagReason = "The customer email address used to place this order (".$customerEmail.") is on the filter list.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
   }

@@ -35,6 +35,8 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     $billingCountryFlag = Mage::getStoreConfig('customizablefraudfilters/filters/billing_country_flag');
     Mage::log("&billingCountryFlag: ".$billingCountryFlag);
 
+    $restrictedEmailFlag = Mage::getStoreConfig('customizablefraudfilters/filters/restricted_email_flag');
+    Mage::log("&restrictedEmailFlag: ".$restrictedEmailFlag);
 
     //begin filters
     if ($stateFlag == 1) {
@@ -71,5 +73,8 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     if ($billingCountryFlag != null) {
       Mage::helper('customizablefraudfilters')->checkBillingCountry($order);
     }   
+    if ($restrictedEmailFlag != null) {
+      Mage::helper('customizablefraudfilters')->checkRestrictedEmails($order);
+    } 
   }
 }
