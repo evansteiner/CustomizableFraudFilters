@@ -8,7 +8,7 @@
     </tabs>
     <sections>
       <customizablefraudfilters  translate="label" module="customizablefraudfilters">                    
-      <label>Customzable Fraud Filters</label>
+      <label>Customizable Fraud Filters</label>
       <tab>foundation</tab>
       <frontend_type>text</frontend_type>
       <sort_order>2</sort_order>
@@ -44,15 +44,24 @@
                      <show_in_store>1</show_in_store>
                      <comment>Select 'yes' to hold orders when the zip codes do not match.</comment>
                 </zip_code_flag>
-                 <grand_total_flag translate="label">
-                   <label>Order grand total is greater than: </label>
+                 <grand_total_max_flag translate="label">
+                   <label>Order grand total is GREATER than: </label>
                      <frontend_type>text</frontend_type>
                      <sort_order>3</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
-                     <comment>Enter only numbers and decimals (ie: 99.99). Leave blank for to deactivate this filter.</comment>
-                </grand_total_flag>                
+                     <comment>Enter only numbers and decimals (ie: 99.99). Leave blank to deactivate this filter.</comment>
+                </grand_total_max_flag>     
+                 <grand_total_min_flag translate="label">
+                   <label>Order grand total is LESS than: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>4</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Enter only numbers and decimals (ie: 1.99). Leave blank to deactivate this filter.</comment>
+                </grand_total_min_flag>                             
              </fields>
           </filters>
          </groups>
