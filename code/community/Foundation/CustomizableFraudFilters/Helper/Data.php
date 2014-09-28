@@ -26,6 +26,15 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
   }
 
 
+  public function checkGrandTotal($order, $grandTotalLimit) {
+    $grandTotal = $order["grand_total"];
+    if ($grandTotal > $grandTotalLimit) {
+      $flagReason = "Grand total of this order ($".number_format($grandTotal,2).") exceeds the grand total limit ($".$grandTotalLimit.").";
+      Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+    }
+  }
+
+
 
   public function applyFraudFlag($order, $flagReason){
     $state = "holded";

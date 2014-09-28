@@ -44,6 +44,15 @@
                      <show_in_store>1</show_in_store>
                      <comment>Select 'yes' to hold orders when the zip codes do not match.</comment>
                 </zip_code_flag>
+                 <grand_total_flag translate="label">
+                   <label>Order grand total is greater than: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>3</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Enter only numbers and decimals (ie: 99.99). Leave blank for to deactivate this filter.</comment>
+                </grand_total_flag>                
              </fields>
           </filters>
          </groups>
