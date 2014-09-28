@@ -8,10 +8,10 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     $stateFlag = Mage::getStoreConfig('customizablefraudfilters/filters/state_flag');
     Mage::log("&stateFlag: ".$stateFlag);
 
-    $cityFlag = Mage::getStoreConfig('customizablefraudfilters/filters/city_flag');
+    $cityFlag = Mage::getStoreConfig('customizablefraudfilters/filters/city_match_flag');
     Mage::log("&cityFlag: ".$cityFlag);  
 
-    $zipCodeFlag = Mage::getStoreConfig('customizablefraudfilters/filters/zip_code_flag');
+    $zipCodeFlag = Mage::getStoreConfig('customizablefraudfilters/filters/zip_code_match_flag');
     Mage::log("&zipCodeFlag: ".$zipCodeFlag);
 
     $countryFlag = Mage::getStoreConfig('customizablefraudfilters/filters/country_match_flag');

@@ -61,7 +61,7 @@
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
                <fields>
-                 <city_flag translate="label">
+                 <city_match_flag translate="label">
                    <label>Flag order when shipping city does not match billing city.</label>
                      <frontend_type>radios</frontend_type>
                      <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -70,8 +70,8 @@
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
                      <comment>Select 'yes' to hold orders when the cities do not match.</comment>
-                </city_flag>
-                 <state_flag translate="label">
+                </city_match_flag>
+                 <state_match_flag translate="label">
                    <label>Flag order when shipping state does not match billing state.</label>
                      <frontend_type>radios</frontend_type>
                      <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -80,8 +80,8 @@
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
                      <comment>Select 'yes' to hold orders when the states do not match.</comment>
-                </state_flag>
-                <zip_code_flag translate="label">
+                </state_match_flag>
+                <zip_code_match_flag translate="label">
                    <label>Flag order when shipping zip code does not match billing zip code.</label>
                      <frontend_type>radios</frontend_type>
                      <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -90,7 +90,7 @@
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
                      <comment>Select 'yes' to hold orders when the zip codes do not match.</comment>
-                </zip_code_flag>
+                </zip_code_match_flag>
                 <country_match_flag translate="label">
                    <label>Flag order when shipping country does not match billing country.</label>
                      <frontend_type>radios</frontend_type>
