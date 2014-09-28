@@ -42,23 +42,18 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
   }
 
 
-  public function sendAlertEmail($alertEmailAddress){
-    Mage::log("step 4");
+  public function sendAlertEmail($order, $alertEmailAddress, $flagReason) {
     $emailTemplate = Mage::getModel("core/email_template")->loadDefault("fraud_filter_alert");
     $emailTemplate->setSenderName("Fraud Alert");
     $emailTemplate->setSenderEmail("no-reply@fraud-alert.com");
-    $emailTemplate->setTemplateSubject("Potential Fraud Alert");
+    $emailTemplate->setTemplateSubject("Potential Fraud Alert: Order #".$order["increment_id"]);
 
     $emailTemplateVariables = array();
-    $emailTemplateVariables['orderNumber'] = "12345";
-    $emailTemplateVariables['storeName'] = "My Test Store";
-    $emailTemplateVariables['flagReason'] = "This is just a test";
-
-    Mage::log("step 5");
+    $emailTemplateVariables['orderNumber'] = $order["increment_id"];
+    $emailTemplateVariables['storeName'] = Mage::app()->getStore()->getFrontendName();
+    $emailTemplateVariables['flagReason'] = $flagReason;
 
     $emailTemplate->send($alertEmailAddress, null, $emailTemplateVariables);   
-
-    Mage::log("step 6");
   }
 
 
@@ -72,13 +67,10 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $order->save(); 
 
     if(Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email') != null){
-      Mage::log("step 1");
       $alertEmailAddresses = Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email');
-      Mage::log("step 2: ".$alertEmailAddresses);
       $alertEmailAddresses = explode(",", $alertEmailAddresses);
       foreach ($alertEmailAddresses as $alertEmailAddress) {
-        Mage::log("step 3: ".$alertEmailAddress);
-        Mage::helper('customizablefraudfilters')->sendAlertEmail($alertEmailAddress);
+        Mage::helper('customizablefraudfilters')->sendAlertEmail($order, $alertEmailAddress, $flagReason);
       }
     }
   }
