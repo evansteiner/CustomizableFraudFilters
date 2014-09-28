@@ -12,6 +12,16 @@
       </customizablefraudfilters>
     </helpers>
 
+    <template>
+      <email>
+        <fraud_filter_alert module="customizablefraudfilters">
+          <label>Potential Fraud Alert</label>
+          <file>fraud_filter_alert.html</file>
+          <type>html</type>
+        </fraud_filter_alert>
+      </email>
+    </template>    
+
   <resources>
     <customizablefraudfilters_setup>
     <setup>
@@ -51,7 +61,8 @@
           </checkout_onepage_controller_success_action_handler>
         </observers>
       </checkout_onepage_controller_success_action>
-    </events>   
+    </events>  
+
   </global>
 
     <adminhtml>

@@ -16,10 +16,33 @@
       <show_in_website>1</show_in_website>
       <show_in_store>1</show_in_store>            
         <groups>
+
+          <alerts translate="label"> 
+            <label>Logging and Alerts</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+               <fields>
+                 <alert_email translate="label">
+                   <label>Send email alert when order is flagged to: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>1</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Enter one or more email addreess (comma seperated) and they will be notified when an order is being held for review.</comment>
+                </alert_email>                             
+             </fields>
+          </alerts>
+
+
+
           <filters translate="label"> 
             <label>Filters</label>
             <frontend_type>text</frontend_type>
-            <sort_order>1</sort_order>
+            <sort_order>2</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
