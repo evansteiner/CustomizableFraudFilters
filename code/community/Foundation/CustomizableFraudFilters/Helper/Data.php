@@ -88,6 +88,21 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     }
   }
 
+
+  public function checkBillingCountry($order) {
+    $filterCountries = Mage::getStoreConfig('customizablefraudfilters/filters/billing_country_flag');
+    $filterCountries = explode(",", $filterCountries);
+    foreach ($filterCountries as $filterCountry) {
+      trim($filterCountry);
+    }
+    $billingAddress = $order->getBillingAddress();
+    $billingCountry = $billingAddress["country_id"];
+    if(in_array($billingCountry, $filterCountries)) {
+      $flagReason = "The blling country for this order (".$billingCountry.") is on the filter list.";
+      Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+    }
+  }
+
   public function applyFraudFlag($order, $flagReason){
 
     $countries = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_country_flag');

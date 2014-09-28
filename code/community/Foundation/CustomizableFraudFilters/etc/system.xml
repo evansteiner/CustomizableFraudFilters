@@ -114,14 +114,23 @@
                      <comment>Enter comma-seperated list of product IDs (not product SKUs):</comment>
                 </order_contains_products_flag>  
                 <shipping_country_flag translate="label">
-                    <label>Flag order when being shipped to countries:</label>
+                    <label>Flag order when shipping country is:</label>
                     <frontend_type>multiselect</frontend_type>
                     <sort_order>35</sort_order>
                     <source_model>adminhtml/system_config_source_country</source_model>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
-                </shipping_country_flag >                                                           
+                </shipping_country_flag >  
+                <billing_country_flag translate="label">
+                    <label>Flag order when billing country is:</label>
+                    <frontend_type>multiselect</frontend_type>
+                    <sort_order>40</sort_order>
+                    <source_model>adminhtml/system_config_source_country</source_model>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </billing_country_flag >                                                          
              </fields>
           </filters>
          </groups>

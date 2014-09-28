@@ -26,6 +26,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     $shippingCountryFlag = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_country_flag');
     Mage::log("&shippingCountryFlag: ".$shippingCountryFlag); 
 
+    $billingCountryFlag = Mage::getStoreConfig('customizablefraudfilters/filters/billing_country_flag');
+    Mage::log("&billingCountryFlag: ".$billingCountryFlag);
+
 
     //begin filters
     if ($stateFlag == 1) {
@@ -52,6 +55,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
 
     if ($shippingCountryFlag != null) {
       Mage::helper('customizablefraudfilters')->checkShippingCountry($order);
-    }     
+    }   
+    if ($billingCountryFlag != null) {
+      Mage::helper('customizablefraudfilters')->checkBillingCountry($order);
+    }   
   }
 }
