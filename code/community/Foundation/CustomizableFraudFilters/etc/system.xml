@@ -57,7 +57,7 @@
             <show_in_store>1</show_in_store>
                <fields>
                  <city_flag translate="label">
-                   <label>Shipping city does not match billing city.</label>
+                   <label>Flag order when shipping city does not match billing city.</label>
                      <frontend_type>radios</frontend_type>
                      <source_model>adminhtml/system_config_source_yesno</source_model>
                      <sort_order>1</sort_order>
@@ -67,7 +67,7 @@
                      <comment>Select 'yes' to hold orders when the cities do not match.</comment>
                 </city_flag>
                  <zip_code_flag translate="label">
-                   <label>Shipping zip code does not match billing zip code.</label>
+                   <label>Flag order when shipping zip code does not match billing zip code.</label>
                      <frontend_type>radios</frontend_type>
                      <source_model>adminhtml/system_config_source_yesno</source_model>
                      <sort_order>2</sort_order>
@@ -77,7 +77,7 @@
                      <comment>Select 'yes' to hold orders when the zip codes do not match.</comment>
                 </zip_code_flag>
                  <grand_total_max_flag translate="label">
-                   <label>Order grand total is GREATER than: </label>
+                   <label>Flag order when grand total is GREATER than: </label>
                      <frontend_type>text</frontend_type>
                      <sort_order>3</sort_order>
                      <show_in_default>1</show_in_default>
@@ -86,7 +86,7 @@
                      <comment>Enter only numbers and decimals (ie: 99.99). Leave blank to deactivate this filter.</comment>
                 </grand_total_max_flag>     
                 <grand_total_min_flag translate="label">
-                   <label>Order grand total is LESS than: </label>
+                   <label>Flag order when grand total is LESS than: </label>
                      <frontend_type>text</frontend_type>
                      <sort_order>4</sort_order>
                      <show_in_default>1</show_in_default>
@@ -95,16 +95,16 @@
                      <comment>Enter only numbers and decimals (ie: 1.99). Leave blank to deactivate this filter.</comment>
                 </grand_total_min_flag> 
                 <order_contains_products_flag translate="label">
-                   <label>Order contains product IDs: </label>
+                   <label>Flag if order contains product IDs: </label>
                      <frontend_type>text</frontend_type>
                      <sort_order>5</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
-                     <comment>Enter product IDs.</comment>
+                     <comment>Enter comma-seperated list of product IDs (not product SKUs):</comment>
                 </order_contains_products_flag>  
                 <shipping_country_flag translate="label">
-                    <label>Flag orders being shipped to:</label>
+                    <label>Flag order when being shipped to countries:</label>
                     <frontend_type>multiselect</frontend_type>
                     <sort_order>6</sort_order>
                     <source_model>adminhtml/system_config_source_country</source_model>
