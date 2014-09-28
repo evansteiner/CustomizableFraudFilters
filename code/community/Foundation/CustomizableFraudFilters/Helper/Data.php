@@ -151,8 +151,8 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $order->setState($state, $status, $comment, $isCustomerNotified);
     $order->save(); 
 
-    if(Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email') != null){
-      $alertEmailAddresses = Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email');
+    if(Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email') != null){
+      $alertEmailAddresses = Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email');
       $alertEmailAddresses = explode(",", $alertEmailAddresses);
       foreach ($alertEmailAddresses as $alertEmailAddress) {
         $alertEmailAddress = trim($alertEmailAddress);
@@ -166,8 +166,8 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $emailTemplate = Mage::getModel("core/email_template")->loadDefault("fraud_filter_alert");
     $emailTemplate->setSenderName("Fraud Alert");
     $emailTemplate->setSenderEmail("no-reply@fraud-alert.com");
-    if(Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email_subject') != "") {
-      $subject = Mage::getStoreConfig('customizablefraudfilters/alerts/alert_email_subject');
+    if(Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email_subject') != "") {
+      $subject = Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email_subject');
     }
     else {
       $subject = "Potential Fraud Alert";
