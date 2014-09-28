@@ -56,14 +56,32 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
         $flaggedItems = $flaggedItems."Product ID: ".$itemId." - ".$item->getName()."<br/>";
       }
     }
-  if($flaggedItems != ""){
+    if($flaggedItems != ""){
       $flagReason = "The order contained the following items which have been flagged for manual review: <br/><br/>".$flaggedItems;
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
       }
   }
 
 
+  public function checkShippingCountry($order) {
+    $filterCountries = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_country_flag');
+    $filterCountries = explode(",", $filterCountries);
+    foreach ($filterCountries as $filterCountry) {
+      trim($filterCountry);
+    }
+    $shippingAddress = $order->getShippingAddress();
+    $shippingCountry = $shippingAddress["country_id"];
+    if(in_array($shippingCountry, $filterCountries)) {
+      $flagReason = "The shipping country for this order (".$shippingCountry.") is on the filter list.";
+      Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+    }
+  }
+
   public function applyFraudFlag($order, $flagReason){
+
+    $countries = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_country_flag');
+    Mage::log("countries: ".$countries);
+
     $state = "holded";
     $status = "manual_review";
     $notice = "Flagged for manual review: ";

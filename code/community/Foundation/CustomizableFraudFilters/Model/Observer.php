@@ -20,6 +20,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     $orderContainsProductsFlag = Mage::getStoreConfig('customizablefraudfilters/filters/order_contains_products_flag');
     Mage::log("&orderContainsProductsFlag: ".$orderContainsProductsFlag);  
 
+    $shippingCountryFlag = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_country_flag');
+    Mage::log("&shippingCountryFlag: ".$shippingCountryFlag); 
+
 
     //begin filters
     if ($cityFlag == 1) {
@@ -39,6 +42,10 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
 
     if ($orderContainsProductsFlag != null) {
       Mage::helper('customizablefraudfilters')->checkOrderContainsProducts($order);
+    }     
+
+    if ($shippingCountryFlag != null) {
+      Mage::helper('customizablefraudfilters')->checkShippingCountry($order);
     }     
   }
 }

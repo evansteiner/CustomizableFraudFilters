@@ -93,7 +93,16 @@
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
                      <comment>Enter product IDs.</comment>
-                </order_contains_products_flag>                                             
+                </order_contains_products_flag>  
+                <shipping_country_flag translate="label">
+                    <label>Flag orders being shipped to:</label>
+                    <frontend_type>multiselect</frontend_type>
+                    <sort_order>6</sort_order>
+                    <source_model>adminhtml/system_config_source_country</source_model>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </shipping_country_flag >                                                           
              </fields>
           </filters>
          </groups>
