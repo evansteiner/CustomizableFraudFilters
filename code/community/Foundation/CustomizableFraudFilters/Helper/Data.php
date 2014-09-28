@@ -46,6 +46,13 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     }
   }
 
+  public function checkGuest($order) {
+    if($order["customer_is_guest"] == 1) {
+      $flagReason = "Order was placed from a guest (not logged in) account.";
+      Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+    }
+  }
+
   public function checkGrandTotalMax($order, $grandTotalMax) {
     $grandTotal = $order["grand_total"];
     if ($grandTotal > $grandTotalMax) {

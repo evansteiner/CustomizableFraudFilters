@@ -96,6 +96,16 @@
                      <show_in_store>1</show_in_store>
                      <comment>Select 'yes' to hold orders when the countries do not match.</comment>
                 </country_match_flag>
+                <guest_flag translate="label">
+                   <label>Flag order when placed by a guest.</label>
+                     <frontend_type>radios</frontend_type>
+                     <source_model>adminhtml/system_config_source_yesno</source_model>
+                     <sort_order>17</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Select 'yes' to hold orders when the customer is not logged into an account when the order was placed.</comment>
+                </guest_flag>
                  <grand_total_max_flag translate="label">
                    <label>Flag order when grand total is GREATER than: </label>
                      <frontend_type>text</frontend_type>

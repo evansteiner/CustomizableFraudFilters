@@ -17,6 +17,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     $countryFlag = Mage::getStoreConfig('customizablefraudfilters/filters/country_match_flag');
     Mage::log("&countryFlag: ".$countryFlag);
 
+    $guestFlag = Mage::getStoreConfig('customizablefraudfilters/filters/guest_flag');
+    Mage::log("&guestFlag: ".$guestFlag);
+
     $grandTotalMaxFlag = Mage::getStoreConfig('customizablefraudfilters/filters/grand_total_max_flag');
     Mage::log("&grandTotalMaxFlag: ".$grandTotalMaxFlag);
 
@@ -45,6 +48,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     }
     if ($countryFlag == 1) {
       Mage::helper('customizablefraudfilters')->checkCountry($order);
+    }
+    if ($guestFlag == 1) {
+      Mage::helper('customizablefraudfilters')->checkGuest($order);
     }
     if ($grandTotalMaxFlag != null && $grandTotalMaxFlag > 0) {
       $grandTotalMax = Mage::getStoreConfig('customizablefraudfilters/filters/grand_total_max_flag');
