@@ -35,6 +35,17 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     }
   }
 
+  public function checkCountry($order) {
+    $billingAddress = $order->getBillingAddress();
+    $shippingAddress = $order->getShippingAddress();
+    $billingCountry = $billingAddress["country_id"];
+    $shippingCountry = $shippingAddress["country_id"];
+    if ($billingCountry != $shippingxCountry) {
+      $flagReason = "Shipping and billing country do not match.";
+      Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+    }
+  }
+
   public function checkGrandTotalMax($order, $grandTotalMax) {
     $grandTotal = $order["grand_total"];
     if ($grandTotal > $grandTotalMax) {

@@ -14,6 +14,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     $zipCodeFlag = Mage::getStoreConfig('customizablefraudfilters/filters/zip_code_flag');
     Mage::log("&zipCodeFlag: ".$zipCodeFlag);
 
+    $countryFlag = Mage::getStoreConfig('customizablefraudfilters/filters/country_match_flag');
+    Mage::log("&countryFlag: ".$countryFlag);
+
     $grandTotalMaxFlag = Mage::getStoreConfig('customizablefraudfilters/filters/grand_total_max_flag');
     Mage::log("&grandTotalMaxFlag: ".$grandTotalMaxFlag);
 
@@ -40,7 +43,10 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     if ($zipCodeFlag == 1) {
       Mage::helper('customizablefraudfilters')->checkZipCode($order);
     }
-       if ($grandTotalMaxFlag != null && $grandTotalMaxFlag > 0) {
+    if ($countryFlag == 1) {
+      Mage::helper('customizablefraudfilters')->checkCountry($order);
+    }
+    if ($grandTotalMaxFlag != null && $grandTotalMaxFlag > 0) {
       $grandTotalMax = Mage::getStoreConfig('customizablefraudfilters/filters/grand_total_max_flag');
       Mage::helper('customizablefraudfilters')->checkGrandTotalMax($order, $grandTotalMax);
     } 
