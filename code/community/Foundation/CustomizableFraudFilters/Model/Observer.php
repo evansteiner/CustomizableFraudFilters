@@ -5,7 +5,7 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     $order = Mage::getModel('sales/order')->loadByIncrementId($orderId);
 
     //set flags
-    $stateFlag = Mage::getStoreConfig('customizablefraudfilters/filters/state_flag');
+    $stateFlag = Mage::getStoreConfig('customizablefraudfilters/filters/state_match_flag');
     Mage::log("&stateFlag: ".$stateFlag);
 
     $cityFlag = Mage::getStoreConfig('customizablefraudfilters/filters/city_match_flag');

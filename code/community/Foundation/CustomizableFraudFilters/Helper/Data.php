@@ -1,7 +1,6 @@
 <?php
 class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_Abstract
 {
-
   public function checkState($order) {
     $billingAddress = $order->getBillingAddress();
     $shippingAddress = $order->getShippingAddress();
@@ -11,6 +10,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Shipping and billing state does not match.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }  
 
   public function checkCity($order) {
@@ -22,6 +22,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Shipping and billing city do not match.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }
 
   public function checkZipCode($order) {
@@ -33,6 +34,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Shipping and billing zip code do not match.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }
 
   public function checkCountry($order) {
@@ -44,6 +46,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Shipping and billing country do not match.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }
 
   public function checkGuest($order) {
@@ -51,6 +54,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Order was placed from a guest (not logged in) account.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }
 
   public function checkGrandTotalMax($order, $grandTotalMax) {
@@ -59,6 +63,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Grand total of this order ($".number_format($grandTotal,2).") exceeds the maximum grand total limit ($".$grandTotalMax.").";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }
 
   public function checkGrandTotalMin($order, $grandTotalMin) {
@@ -67,6 +72,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Grand total of this order ($".number_format($grandTotal,2).") is less then the minimum grand total limit ($".$grandTotalMin.").";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }
 
 
@@ -89,7 +95,8 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     if($flaggedItems != ""){
       $flagReason = "The order contained the following items which have been flagged for manual review: <br/><br/>".$flaggedItems;
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
-      }
+    }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }
 
 
@@ -106,6 +113,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "The shipping country for this order (".$shippingCountry.") is on the filter list.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }
 
 
@@ -122,6 +130,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "The billing country for this order (".$billingCountry.") is on the filter list.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }
 
   public function checkRestrictedEmails($order) {
@@ -136,13 +145,10 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "The customer email address used to place this order (".$customerEmail.") is on the filter list.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }
 
   public function applyFraudFlag($order, $flagReason){
-
-    $countries = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_country_flag');
-    Mage::log("countries: ".$countries);
-
     $state = "holded";
     $status = "manual_review";
     $notice = "Flagged for manual review: ";
@@ -183,5 +189,18 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $emailTemplate->send($alertEmailAddress, null, $emailTemplateVariables);   
   }
 
+  public function logAction($order, $functionName, $flagReason) {
+    if(Mage::getStoreConfig('customizablefraudfilters/general_settings/filter_logging') == 1) {
+      if($flagReason != null){
+        $result = "failed";
+      }
+      else {
+        $result = "passed";
+      }
+      $orderId = $order["increment_id"];
+      $message = $orderId.": ".$functionName." - ".$result;
+      Mage::log($message, null, 'customizablefraudfilters.log');
+    }
+  }
 }
 	 
