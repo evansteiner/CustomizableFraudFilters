@@ -10,7 +10,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Shipping and billing state does not match.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }  
 
   public function checkCity($order) {
@@ -22,7 +27,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Shipping and billing city do not match.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
   public function checkZipCode($order) {
@@ -34,7 +44,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Shipping and billing zip code do not match.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
   public function checkCountry($order) {
@@ -48,7 +63,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Shipping and billing country do not match.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
   public function checkGuest($order) {
@@ -56,7 +76,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Order was placed from a guest (not logged in) account.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
   public function checkGrandTotalMax($order, $grandTotalMax) {
@@ -65,7 +90,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Grand total of this order ($".number_format($grandTotal,2).") exceeds the maximum grand total limit ($".$grandTotalMax.").";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
   public function checkGrandTotalMin($order, $grandTotalMin) {
@@ -74,7 +104,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "Grand total of this order ($".number_format($grandTotal,2).") is less than the minimum grand total limit ($".$grandTotalMin.").";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
 
@@ -98,7 +133,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "The order contained the following items which have been flagged for manual review: <br/><br/>".$flaggedItems;
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
 
@@ -115,7 +155,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "The shipping country for this order (".$shippingCountry.") is on the filter list.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
 
@@ -132,7 +177,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "The billing country for this order (".$billingCountry.") is on the filter list.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
 
@@ -150,7 +200,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       }
       unset($filterString);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
 
@@ -168,7 +223,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       }
       unset($filterString);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
   public function checkRestrictedEmails($order) {
@@ -183,7 +243,12 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $flagReason = "The customer email address used to place this order (".$customerEmail.") is on the filter list.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
-    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
   }
 
   public function applyFraudFlag($order, $flagReason){
@@ -229,7 +294,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
 
   public function logAction($order, $functionName, $flagReason) {
     if(Mage::getStoreConfig('customizablefraudfilters/general_settings/filter_logging') == 1) {
-      if($flagReason != null){
+      if($flagReason != ""){
         $result = "failed";
       }
       else {
