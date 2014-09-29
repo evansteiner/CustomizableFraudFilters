@@ -153,6 +153,24 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }
 
+
+  public function checkShippingStreetContains($order) {
+    $shippingAddress = $order->getShippingAddress();
+    $shippingStreet = $shippingAddress["street"];
+
+    $filterStrings = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_street_contains_flag');
+    $filterStrings = str_getcsv($filterStrings,',','"');
+    foreach ($filterStrings as &$filterString) {
+      $filterString = trim($filterString);
+      if(stripos($shippingStreet, $filterString) !== false){
+        $flagReason = "The shipping street address for this order contains a filtered phrase ('".$filterString."').";
+        Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+      }
+      unset($filterString);
+    }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+  }
+
   public function checkRestrictedEmails($order) {
     $filterEmails = Mage::getStoreConfig('customizablefraudfilters/filters/restricted_email_flag');
     $filterEmails = explode(",", $filterEmails);
