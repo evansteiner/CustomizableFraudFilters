@@ -42,7 +42,9 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $shippingAddress = $order->getShippingAddress();
     $billingCountry = $billingAddress["country_id"];
     $shippingCountry = $shippingAddress["country_id"];
-    if ($billingCountry != $shippingxCountry) {
+    Mage::log("billingCountry: ".$billingCountry);
+    Mage::log("shippingCountry: ".$shippingCountry);
+    if ($billingCountry != $shippingCountry) {
       $flagReason = "Shipping and billing country do not match.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
@@ -69,7 +71,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
   public function checkGrandTotalMin($order, $grandTotalMin) {
     $grandTotal = $order["grand_total"];
     if ($grandTotal < $grandTotalMin) {
-      $flagReason = "Grand total of this order ($".number_format($grandTotal,2).") is less then the minimum grand total limit ($".$grandTotalMin.").";
+      $flagReason = "Grand total of this order ($".number_format($grandTotal,2).") is less than the minimum grand total limit ($".$grandTotalMin.").";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
     }
     Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
@@ -129,6 +131,24 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     if(in_array($billingCountry, $filterCountries)) {
       $flagReason = "The billing country for this order (".$billingCountry.") is on the filter list.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+    }
+    Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+  }
+
+
+  public function checkBillingStreetContains($order) {
+    $billingAddress = $order->getBillingAddress();
+    $billingStreet = $billingAddress["street"];
+
+    $filterStrings = Mage::getStoreConfig('customizablefraudfilters/filters/billing_street_contains_flag');
+    $filterStrings = str_getcsv($filterStrings,',','"');
+    foreach ($filterStrings as &$filterString) {
+      $filterString = trim($filterString);
+      if(stripos($billingStreet, $filterString) !== false){
+        $flagReason = "The billing street address for this order contains a filtered phrase ('".$filterString."').";
+        Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+      }
+      unset($filterString);
     }
     Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
   }

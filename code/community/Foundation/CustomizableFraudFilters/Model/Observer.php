@@ -38,6 +38,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     $restrictedEmailFlag = Mage::getStoreConfig('customizablefraudfilters/filters/restricted_email_flag');
     Mage::log("&restrictedEmailFlag: ".$restrictedEmailFlag);
 
+    $billingStreetContainsFlag = Mage::getStoreConfig('customizablefraudfilters/filters/billing_street_contains_flag');
+    Mage::log("&billingStreetContainsFlag: ".$billingStreetContainsFlag);
+
     //begin filters
     if ($stateFlag == 1) {
       Mage::helper('customizablefraudfilters')->checkState($order);
@@ -75,6 +78,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     }   
     if ($restrictedEmailFlag != null) {
       Mage::helper('customizablefraudfilters')->checkRestrictedEmails($order);
+    } 
+    if ($billingStreetContainsFlag != null) {
+      Mage::helper('customizablefraudfilters')->checkBillingStreetContains($order);
     } 
   }
 }
