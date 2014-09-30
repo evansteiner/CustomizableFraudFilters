@@ -58,13 +58,22 @@
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
-                     <comment>This is the name that you alert emails will appear to come from. Leave blank to use the default "CustomizableFraudFilters".</comment>
+                     <comment>This is the name that you alert emails will appear to come from. If left blank, your store name will be used as the default.</comment>
                 </alert_email_from>  
+                <alert_email_reply translate="label">
+                   <label>Alert email reply-to address: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>18</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>This is the email address that will recieve replies to alert emails. If left blank, it will default to no-reply@yourstoreurl.com.</comment>
+                </alert_email_reply> 
                 <include_order_link translate="label">
                    <label>Inlucde link to order in alert emails:</label>
                      <frontend_type>radios</frontend_type>
                      <source_model>adminhtml/system_config_source_yesno</source_model>
-                     <sort_order>18</sort_order>
+                     <sort_order>19</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>

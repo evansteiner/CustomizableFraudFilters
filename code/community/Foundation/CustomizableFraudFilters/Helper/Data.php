@@ -295,10 +295,18 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
       $from = Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email_from');
     }
     else {
-      $from = "CustomizableFraudFilters";
+      $from = Mage::app()->getStore()->getFrontendName();
     }
     $emailTemplate->setSenderName($from);
-    $emailTemplate->setSenderEmail("no-reply@fraud-alert.com");
+
+    if(Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email_reply') != "") {
+      $replyTo = Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email_reply');
+    }
+    else {
+      $replyTo = Mage::getStoreConfig('trans_email/ident_general/email');
+    }    
+    $emailTemplate->setSenderEmail($replyTo);
+
     if(Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email_subject') != "") {
       $subject = Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email_subject');
     }
@@ -316,6 +324,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $emailTemplateVariables['orderNumber'] = $order["increment_id"];
     $emailTemplateVariables['storeName'] = Mage::app()->getStore()->getFrontendName();
     $emailTemplateVariables['flagReason'] = $flagReason;
+
     if(Mage::getStoreConfig('customizablefraudfilters/general_settings/include_order_link') == 1){
       $emailTemplateVariables['orderUrl'] = $orderUrl;
     }
