@@ -73,25 +73,25 @@
 
   </global>
 
-    <adminhtml>
-        <acl>
-            <resources>
-                <admin>
-                    <children>
-                        <system>
-                            <children>
-                                <config>
-                                    <children>
-                                        <customizablefraudfilters>
-                                            <title>Customizable Fraud Filters</title>
-                                        </customizablefraudfilters>
-                                    </children>
-                                </config>
-                            </children>
-                        </system>
-                    </children>
-                </admin>
-            </resources>
-        </acl>
-    </adminhtml>   
+  <adminhtml>
+    <acl>
+      <resources>
+        <admin>
+          <children>
+            <system>
+              <children>
+                <config>
+                  <children>
+                    <customizablefraudfilters>
+                      <title>Customizable Fraud Filters</title>
+                    </customizablefraudfilters>
+                  </children>
+                </config>
+              </children>
+            </system>
+          </children>
+        </admin>
+      </resources>
+    </acl>
+  </adminhtml>   
 </config> 
