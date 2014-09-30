@@ -316,7 +316,9 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $emailTemplateVariables['orderNumber'] = $order["increment_id"];
     $emailTemplateVariables['storeName'] = Mage::app()->getStore()->getFrontendName();
     $emailTemplateVariables['flagReason'] = $flagReason;
-    $emailTemplateVariables['orderUrl'] = $orderUrl;
+    if(Mage::getStoreConfig('customizablefraudfilters/general_settings/include_order_link') == 1){
+      $emailTemplateVariables['orderUrl'] = $orderUrl;
+    }
 
     $emailTemplate->send($alertEmailAddress, null, $emailTemplateVariables);   
   }
