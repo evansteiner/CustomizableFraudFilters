@@ -298,6 +298,10 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     else {
       $subject = "Potential Fraud Alert";
     }
+
+    $orderEntityId = $order['entity_id'];
+    $orderUrl = Mage::helper('adminhtml')->getUrl('adminhtml/sales_order/view',array('order_id' => $orderEntityId));
+
     $emailTemplate->setTemplateSubject($subject.": Order #".$order["increment_id"]);
     $emailTemplate->setType("html");
 
@@ -305,6 +309,7 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $emailTemplateVariables['orderNumber'] = $order["increment_id"];
     $emailTemplateVariables['storeName'] = Mage::app()->getStore()->getFrontendName();
     $emailTemplateVariables['flagReason'] = $flagReason;
+    $emailTemplateVariables['orderUrl'] = $orderUrl;
 
     $emailTemplate->send($alertEmailAddress, null, $emailTemplateVariables);   
   }
