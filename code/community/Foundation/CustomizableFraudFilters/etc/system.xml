@@ -165,7 +165,7 @@
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
                      <comment>Enter comma-seperated list of product IDs (not product SKUs).</comment>
-                </order_contains_products_flag>  
+                </order_contains_products_flag> 
                 <shipping_country_flag translate="label">
                     <label>Flag order when shipping country is:</label>
                     <frontend_type>multiselect</frontend_type>
@@ -184,6 +184,15 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                 </billing_country_flag>
+                <shipping_method_flag translate="label">
+                    <label>Flag if shipping method is:</label>
+                    <frontend_type>multiselect</frontend_type>
+                    <sort_order>43</sort_order>
+                    <source_model>customizablefraudfilters_adminhtml/system_config_source_shipping</source_model>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </shipping_method_flag>
                 <restricted_email_flag translate="label">
                    <label>Flag order if customer email is: </label>
                      <frontend_type>text</frontend_type>
