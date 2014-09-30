@@ -51,6 +51,15 @@
                      <show_in_store>1</show_in_store>
                      <comment>The order number will be automatically appended to the end of your subject. Leave blank to use default subject line.</comment>
                 </alert_email_subject>   
+                <alert_email_from translate="label">
+                   <label>Alert email from name: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>17</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>This is the name that you alert emails will appear to come from. Leave blank to use the default "CustomizableFraudFilters".</comment>
+                </alert_email_from>  
                 <filter_logging translate="label">
                    <label>Enable logging:</label>
                      <frontend_type>radios</frontend_type>

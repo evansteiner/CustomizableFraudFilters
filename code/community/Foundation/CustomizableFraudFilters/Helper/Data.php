@@ -290,7 +290,14 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
 
   public function sendAlertEmail($order, $alertEmailAddress, $flagReason) {
     $emailTemplate = Mage::getModel("core/email_template")->loadDefault("fraud_filter_alert");
-    $emailTemplate->setSenderName("Fraud Alert");
+
+    if(Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email_from') != "") {
+      $from = Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email_from');
+    }
+    else {
+      $from = "CustomizableFraudFilters";
+    }
+    $emailTemplate->setSenderName($from);
     $emailTemplate->setSenderEmail("no-reply@fraud-alert.com");
     if(Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email_subject') != "") {
       $subject = Mage::getStoreConfig('customizablefraudfilters/general_settings/alert_email_subject');
