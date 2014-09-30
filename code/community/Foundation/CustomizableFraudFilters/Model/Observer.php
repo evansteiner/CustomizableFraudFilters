@@ -44,6 +44,10 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     $shippingStreetContainsFlag = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_street_contains_flag');
     Mage::log("&shippingStreetContainsFlag: ".$shippingStreetContainsFlag);
 
+    $shippingMethodFlag = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_method_flag');
+    Mage::log("&shippingMethodFlag: ".$shippingMethodFlag);
+
+
     //begin filters
     if ($stateFlag == 1) {
       Mage::helper('customizablefraudfilters')->checkState($order);
@@ -87,6 +91,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
     } 
     if ($shippingStreetContainsFlag != null) {
       Mage::helper('customizablefraudfilters')->checkShippingStreetContains($order);
+    } 
+    if ($shippingMethodFlag != null) {
+      Mage::helper('customizablefraudfilters')->checkShippingMethod($order);
     } 
   }
 }

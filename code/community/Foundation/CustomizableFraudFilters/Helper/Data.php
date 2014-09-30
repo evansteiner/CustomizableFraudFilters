@@ -185,6 +185,23 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     }
   }
 
+  public function checkShippingMethod($order) {
+    $filterMethods = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_method_flag');
+    $filterMethods = explode(",", $filterMethods);
+    $orderShippingMethod = $order['shipping_method'];
+
+    if(in_array($orderShippingMethod, $filterMethods)) {
+      $flagReason = "The shipping method for this order (".$orderShippingMethod.") is on the filter list.";
+      Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
+    }
+    if(isset($flagReason)){
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, $flagReason);
+    }
+    else {
+      Mage::helper('customizablefraudfilters')->logAction($order, __FUNCTION__, "");
+    }
+  }
+
 
   public function checkBillingStreetContains($order) {
     $billingAddress = $order->getBillingAddress();
