@@ -31,7 +31,7 @@
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
-                     <comment>The order status your customer will see when the order has been flagged for review. Some themes may not show status. If left blank, the default status of "Held For Manual Review" will be shown.</comment>
+                     <comment>The order status your customer will see when the order has been flagged for review. Some themes may not show status. If left blank, the default status of "Held For Manual Review" will be shown. Applies retroactively.</comment>
                 </frontend_status> 
                  <alert_email translate="label">
                    <label>Send email alert when order is flagged to: </label>
