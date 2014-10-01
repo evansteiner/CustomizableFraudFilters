@@ -3,7 +3,7 @@
    <tabs>
       <foundation translate="label" module="customizablefraudfilters">
         <label>Foundation Extensions</label>
-          <sort_order>100</sort_order>
+          <sort_order>900</sort_order>
       </foundation>
     </tabs>
     <sections>
