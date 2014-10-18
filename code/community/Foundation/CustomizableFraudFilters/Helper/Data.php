@@ -57,8 +57,6 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     $shippingAddress = $order->getShippingAddress();
     $billingCountry = $billingAddress["country_id"];
     $shippingCountry = $shippingAddress["country_id"];
-    Mage::log("billingCountry: ".$billingCountry);
-    Mage::log("shippingCountry: ".$shippingCountry);
     if ($billingCountry != $shippingCountry) {
       $flagReason = "Shipping and billing country do not match.";
       Mage::helper('customizablefraudfilters')->applyFraudFlag($order, $flagReason);
@@ -346,4 +344,4 @@ class Foundation_CustomizableFraudFilters_Helper_Data extends Mage_Core_Helper_A
     }
   }
 }
-	 
+   

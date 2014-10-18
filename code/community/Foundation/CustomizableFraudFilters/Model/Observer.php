@@ -6,47 +6,37 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
 
     //set flags
     $stateFlag = Mage::getStoreConfig('customizablefraudfilters/filters/state_match_flag');
-    Mage::log("&stateFlag: ".$stateFlag);
-
     $cityFlag = Mage::getStoreConfig('customizablefraudfilters/filters/city_match_flag');
-    Mage::log("&cityFlag: ".$cityFlag);  
-
     $zipCodeFlag = Mage::getStoreConfig('customizablefraudfilters/filters/zip_code_match_flag');
-    Mage::log("&zipCodeFlag: ".$zipCodeFlag);
-
     $countryFlag = Mage::getStoreConfig('customizablefraudfilters/filters/country_match_flag');
-    Mage::log("&countryFlag: ".$countryFlag);
-
     $guestFlag = Mage::getStoreConfig('customizablefraudfilters/filters/guest_flag');
-    Mage::log("&guestFlag: ".$guestFlag);
-
     $grandTotalMaxFlag = Mage::getStoreConfig('customizablefraudfilters/filters/grand_total_max_flag');
-    Mage::log("&grandTotalMaxFlag: ".$grandTotalMaxFlag);
-
     $grandTotalMinFlag = Mage::getStoreConfig('customizablefraudfilters/filters/grand_total_min_flag');
-    Mage::log("&grandTotalMinFlag: ".$grandTotalMinFlag);    
-
     $orderContainsProductsFlag = Mage::getStoreConfig('customizablefraudfilters/filters/order_contains_products_flag');
-    Mage::log("&orderContainsProductsFlag: ".$orderContainsProductsFlag);  
-
     $shippingCountryFlag = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_country_flag');
-    Mage::log("&shippingCountryFlag: ".$shippingCountryFlag); 
-
     $billingCountryFlag = Mage::getStoreConfig('customizablefraudfilters/filters/billing_country_flag');
-    Mage::log("&billingCountryFlag: ".$billingCountryFlag);
-
     $restrictedEmailFlag = Mage::getStoreConfig('customizablefraudfilters/filters/restricted_email_flag');
-    Mage::log("&restrictedEmailFlag: ".$restrictedEmailFlag);
-
     $billingStreetContainsFlag = Mage::getStoreConfig('customizablefraudfilters/filters/billing_street_contains_flag');
-    Mage::log("&billingStreetContainsFlag: ".$billingStreetContainsFlag);
-
     $shippingStreetContainsFlag = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_street_contains_flag');
-    Mage::log("&shippingStreetContainsFlag: ".$shippingStreetContainsFlag);
-
     $shippingMethodFlag = Mage::getStoreConfig('customizablefraudfilters/filters/shipping_method_flag');
-    Mage::log("&shippingMethodFlag: ".$shippingMethodFlag);
+    
 
+    // Logging for all flags
+    // Mage::log("&stateFlag: ".$stateFlag);
+    // Mage::log("&cityFlag: ".$cityFlag);
+    // Mage::log("&zipCodeFlag: ".$zipCodeFlag);
+    // Mage::log("&countryFlag: ".$countryFlag);
+    // Mage::log("&guestFlag: ".$guestFlag);
+    // Mage::log("&grandTotalMaxFlag: ".$grandTotalMaxFlag);
+    // Mage::log("&grandTotalMinFlag: ".$grandTotalMinFlag);
+    // Mage::log("&orderContainsProductsFlag: ".$orderContainsProductsFlag); 
+    // Mage::log("&shippingCountryFlag: ".$shippingCountryFlag); 
+    // Mage::log("&billingCountryFlag: ".$billingCountryFlag);
+    // Mage::log("&restrictedEmailFlag: ".$restrictedEmailFlag);
+    // Mage::log("&billingStreetContainsFlag: ".$billingStreetContainsFlag);
+    // Mage::log("&shippingStreetContainsFlag: ".$shippingStreetContainsFlag);
+    // Mage::log("&shippingMethodFlag: ".$shippingMethodFlag);
+    
 
     //begin filters
     if ($stateFlag == 1) {
@@ -72,11 +62,9 @@ class Foundation_CustomizableFraudFilters_Model_Observer {
       $grandTotalMin = Mage::getStoreConfig('customizablefraudfilters/filters/grand_total_min_flag');
       Mage::helper('customizablefraudfilters')->checkGrandTotalMin($order, $grandTotalMin);
     } 
-
     if ($orderContainsProductsFlag != null) {
       Mage::helper('customizablefraudfilters')->checkOrderContainsProducts($order);
     }     
-
     if ($shippingCountryFlag != null) {
       Mage::helper('customizablefraudfilters')->checkShippingCountry($order);
     }   
